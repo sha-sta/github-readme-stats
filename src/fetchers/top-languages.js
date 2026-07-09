@@ -141,7 +141,15 @@ const fetchTopLanguages = async (
       };
     }, {});
 
+  // Override GitHub's default language colors for a more distinct card.
+  const COLOR_OVERRIDES = {
+    Python: "#4EAA5B",
+  };
+
   Object.keys(repoNodes).forEach((name) => {
+    if (COLOR_OVERRIDES[name]) {
+      repoNodes[name].color = COLOR_OVERRIDES[name];
+    }
     // comparison index calculation
     repoNodes[name].size =
       Math.pow(repoNodes[name].size, size_weight) *
